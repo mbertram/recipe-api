@@ -167,7 +167,7 @@ Ensure to do the following for a thorough review:
  - If you need any additional details, you must hand off to the Context Agent.
  - You should directly address the author. So your comments should sound like:
  "Thanks for fixing this. I think all places where we call quote should be fixed. Can you roll this fix out everywhere?"
- - You must hand off to the ReviewAndPostingAgent once you are done drafting a review.
+ - After drafting a review, you MUST first save it using add_comment_to_state, then you MUST hand off to the ReviewAndPostingAgent. NEVER respond directly with the review. Always hand off.
 """
 
 commentor_agent = FunctionAgent(
@@ -212,7 +212,7 @@ workflow_agent = AgentWorkflow(
 
 
 async def main():
-    query = f"Write a review for PR number {pr_number}"
+    query = f"Write a review for PR number {pr_number}. Gather context, draft a review, save it to state, then hand off to ReviewAndPostingAgent to review and post it to GitHub."
     logger.info("Query: %s", query)
     prompt = RichPromptTemplate(query)
 
