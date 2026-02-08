@@ -12,7 +12,7 @@
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-org/recipe-api.git
+git clone https://github.com/mbertram/recipe-api.git
 cd recipe-api
 
 # Install dependencies and activate environment
