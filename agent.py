@@ -117,27 +117,36 @@ def post_review_to_github(pr_number: int, comment: str) -> str:
 async def add_context_to_state(ctx, context: str) -> str:
     """Useful for adding the gathered context to the state."""
     logger.info("Adding context to state (%d chars)", len(context))
-    current_state = await ctx.get("state")
-    current_state["gathered_contexts"] = context
-    await ctx.set("state", current_state)
+    try:
+        current_state = await ctx.get("state")
+        current_state["gathered_contexts"] = context
+        await ctx.set("state", current_state)
+    except AttributeError:
+        ctx.state["gathered_contexts"] = context
     return "State updated with gathered contexts."
 
 
 async def add_comment_to_state(ctx, draft_comment: str) -> str:
     """Useful for adding the draft comment to the state."""
     logger.info("Adding draft comment to state (%d chars)", len(draft_comment))
-    current_state = await ctx.get("state")
-    current_state["review_comment"] = draft_comment
-    await ctx.set("state", current_state)
+    try:
+        current_state = await ctx.get("state")
+        current_state["review_comment"] = draft_comment
+        await ctx.set("state", current_state)
+    except AttributeError:
+        ctx.state["review_comment"] = draft_comment
     return "State updated with draft comment."
 
 
 async def add_final_review_to_state(ctx, final_review: str) -> str:
     """Useful for adding the final review comment to the state."""
     logger.info("Adding final review to state (%d chars)", len(final_review))
-    current_state = await ctx.get("state")
-    current_state["final_review_comment"] = final_review
-    await ctx.set("state", current_state)
+    try:
+        current_state = await ctx.get("state")
+        current_state["final_review_comment"] = final_review
+        await ctx.set("state", current_state)
+    except AttributeError:
+        ctx.state["final_review_comment"] = final_review
     return "State updated with final review comment."
 
 
