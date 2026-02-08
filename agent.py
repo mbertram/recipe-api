@@ -237,11 +237,9 @@ async def main():
             print(f"Calling selected tool: {event.tool_name}, with arguments: {event.tool_kwargs}")
 
     logger.info("Query processing complete")
+    git.close()
+    logger.info("GitHub connection closed")
 
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    finally:
-        git.close()
-        logger.info("GitHub connection closed")
+    asyncio.run(main())
