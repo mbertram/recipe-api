@@ -109,7 +109,7 @@ def post_review_to_github(pr_number: int, comment: str) -> str:
     """Post a review comment to a GitHub pull request given the PR number and the review comment body."""
     logger.info("Posting review to PR #%d", pr_number)
     pr = repo.get_pull(pr_number)
-    pr.create_review(body=comment)
+    pr.create_review(body=comment, event="COMMENT")
     logger.info("Review posted successfully to PR #%d", pr_number)
     return f"Review posted successfully to PR #{pr_number}."
 
