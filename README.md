@@ -56,10 +56,11 @@ We use Poetry for dependency management and virtual environments.
    ```bash
    poetry run pytest
    ```
-
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://github.com/the-nulldev/recipes-api/blob/main/CONTRIBUTING.md) for detailed guidelines on issues, pull requests, coding style, and testing.
+
+All pull requests are automatically reviewed by an AI agent via GitHub Actions, so please ensure your PR includes a clear title and description.
 
 ## License
 
