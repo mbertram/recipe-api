@@ -1,18 +1,31 @@
 from rest_framework import serializers
-from .models import Recipe, RecipeRating
+
+from .models import Recipe
+
+"""Serializers for the recipes app.
+
+This module defines serializers used by the API endpoints to serialize and
+deserialize Recipe instances.
+"""
+
 
 class RecipeSerializer(serializers.ModelSerializer):
+    """Serializer for the Recipe model.
+
+    Exposes the following fields:
+    - id: auto-generated primary key
+    - title: short name/title of the recipe
+    - description: optional detailed instructions
+    - time_minutes: estimated preparation time in minutes
+    - price: estimated cost to prepare the recipe
+
+    The ModelSerializer base class will automatically generate serializer
+    fields that correspond to the model's fields.
+    """
+
     class Meta:
         model = Recipe
+        # Fields included in API representations and (de)serialization.
         fields = ["id", "title", "description", "time_minutes", "price"]
-
-class RecipeRatingSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = RecipeRating
-        fields = ["id", "stars", "created_at"]
-        read_only_fields = ["id", "created_at"]
-
-    def validate_stars(self, value):
-        if not (1 <= value <= 5):
-            raise serializers.ValidationError("Rating must be between 1 and 5.")
-        return value
+        # Note: you can add `read_only_fields` or `extra_kwargs` here to
+        # customize field behavior (e.g., making 'id' read-only).
